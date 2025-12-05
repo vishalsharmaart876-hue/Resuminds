@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResuMinds - AI Resume Analyzer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen text-slate-800 relative">
+
+    <div class="fixed inset-0 z-[-1]">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2069" 
+             alt="Office Background" 
+             class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-50/90 via-white/95 to-purple-100/90 backdrop-blur-sm"></div>
+    </div>
+
+    <nav class="bg-white/80 backdrop-blur-md border-b border-violet-100 sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="bg-gradient-to-tr from-violet-500 to-purple-600 p-2 rounded-lg shadow-md">
+                    <i data-lucide="sparkles" class="h-5 w-5 text-white"></i>
+                </div>
+                <span class="font-bold text-xl tracking-tight text-violet-900">ResuMinds</span>
+            </div>
+            <button onclick="location.reload()" class="text-sm text-slate-600 hover:text-violet-600 font-medium px-4 py-2 rounded-full hover:bg-violet-50 transition-all">
+                New Scan
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 py-12">
+        
+        <div id="view-upload" class="fade-in">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+                    Is your resume <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600">ATS ready?</span>
+                </h1>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                    Our AI-powered analyzer scans for weak verbs, passive voice, and formatting errors to help you land more interviews.
+                </p>
+            </div>
+
+            <div class="max-w-xl mx-auto">
+                <div class="bg-white/60 backdrop-blur-sm p-12 rounded-3xl shadow-xl border border-white/50 hover:shadow-2xl hover:bg-white/80 transition-all relative overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-violet-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+                    <div class="flex flex-col items-center justify-center h-full text-center space-y-6">
+                        <div class="bg-violet-50 p-6 rounded-2xl mb-2 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="upload" class="h-10 w-10 text-violet-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-900">Upload Resume</h3>
+                            <p class="text-slate-500 mt-2">Supports PDF, DOCX, TXT</p>
+                        </div>
+                        
+                        <label class="cursor-pointer bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-bold py-4 px-10 rounded-xl transition-all w-full sm:w-auto shadow-lg shadow-violet-200 hover:shadow-violet-300 transform hover:-translate-y-0.5 inline-block">
+                            <span>Select File</span>
+                            <input type="file" id="file-input" class="hidden" accept=".pdf,.txt,.doc,.docx">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-analyzing" class="hidden flex flex-col items-center justify-center min-h-[50vh] fade-in">
+            <div class="relative">
+                <div class="w-24 h-24 border-4 border-violet-100 border-t-violet-600 rounded-full animate-spin"></div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <i data-lucide="sparkles" class="h-8 w-8 text-violet-600 animate-pulse"></i>
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold mt-8 text-slate-800">Analyzing your resume...</h2>
+            <div class="w-64 mt-4 space-y-3 bg-white/50 p-4 rounded-xl border border-white/60 backdrop-blur-sm">
+                <div class="flex items-center gap-3 text-sm text-slate-600 animate-pulse">
+                    <i data-lucide="check-circle" class="h-4 w-4 text-emerald-500"></i> Checking keywords
+                </div>
+                <div class="flex items-center gap-3 text-sm text-slate-600 animate-pulse delay-100">
+                    <i data-lucide="check-circle" class="h-4 w-4 text-emerald-500"></i> Scanning for passive voice
+                </div>
+                <div class="flex items-center gap-3 text-sm text-slate-600 animate-pulse delay-200">
+                    <i data-lucide="check-circle" class="h-4 w-4 text-emerald-500"></i> Evaluating impact metrics
+                </div>
+            </div>
+        </div>
+
+        <div id="view-results" class="hidden slide-up">
+            <div class="bg-white rounded-2xl shadow-lg border border-slate-100 p-6 mb-8">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-6">
+                        <div id="score-ring" class="relative flex items-center justify-center w-24 h-24 rounded-full border-8 border-violet-500 text-violet-600">
+                            <span id="score-display" class="text-3xl font-bold">0</span>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900">Overall Score</h2>
+                            <p id="filename-display" class="text-slate-500 text-sm">File: resume.pdf</p>
+                            <div class="flex gap-2 mt-2">
+                                <span id="word-count-badge" class="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-md font-medium">0 words</span>
+                                <span id="issue-count-badge" class="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-md font-medium">0 issues</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-4 w-full md:w-auto">
+                        <div id="rating-card-impact" class="flex-1 md:flex-none text-center bg-slate-50 p-4 rounded-xl transition-colors">
+                            <div class="text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Impact</div>
+                            <div id="rating-text-impact" class="font-semibold text-slate-700">Calculating...</div>
+                        </div>
+                        <div id="rating-card-brevity" class="flex-1 md:flex-none text-center bg-slate-50 p-4 rounded-xl transition-colors">
+                            <div class="text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Brevity</div>
+                            <div id="rating-text-brevity" class="font-semibold text-slate-700">Calculating...</div>
+                        </div>
+                        <div id="rating-card-style" class="flex-1 md:flex-none text-center bg-slate-50 p-4 rounded-xl transition-colors">
+                            <div class="text-slate-400 text-xs uppercase font-bold tracking-wider mb-1">Style</div>
+                            <div id="rating-text-style" class="font-semibold text-slate-700">Calculating...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4">
+                        <h3 class="font-bold text-slate-800 mb-4 px-2">Filter Issues</h3>
+                        <button onclick="filterIssues('all')" id="btn-all" class="w-full text-left px-4 py-3 rounded-lg flex items-center justify-between mb-1 bg-violet-50 text-violet-700 font-medium transition-colors">
+                            <span class="flex items-center gap-2"><i data-lucide="bar-chart" class="w-4 h-4"></i> All Issues</span>
+                            <span id="count-all" class="bg-slate-200 text-slate-600 text-xs px-2 py-0.5 rounded-full">0</span>
+                        </button>
+                        <button onclick="filterIssues('impact')" id="btn-impact" class="w-full text-left px-4 py-3 rounded-lg flex items-center justify-between mb-1 text-slate-600 hover:bg-slate-50 transition-colors">
+                            <span class="flex items-center gap-2"><i data-lucide="type" class="w-4 h-4"></i> Impact & Verbs</span>
+                            <span id="count-impact" class="bg-slate-200 text-slate-600 text-xs px-2 py-0.5 rounded-full">0</span>
+                        </button>
+                        <button onclick="filterIssues('style')" id="btn-style" class="w-full text-left px-4 py-3 rounded-lg flex items-center justify-between mb-1 text-slate-600 hover:bg-slate-50 transition-colors">
+                            <span class="flex items-center gap-2"><i data-lucide="align-left" class="w-4 h-4"></i> Style & Grammar</span>
+                            <span id="count-style" class="bg-slate-200 text-slate-600 text-xs px-2 py-0.5 rounded-full">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 space-y-6">
+                    <h3 class="font-bold text-xl text-slate-800">Detailed Suggestions</h3>
+                    <div id="issues-container" class="space-y-4">
+                        </div>
+                    
+                    <div id="no-issues-msg" class="hidden bg-emerald-50 border border-emerald-100 rounded-xl p-8 text-center">
+                        <i data-lucide="check-circle" class="w-12 h-12 text-emerald-500 mx-auto mb-4"></i>
+                        <h3 class="text-lg font-bold text-emerald-800">No issues found in this category!</h3>
+                        <p class="text-emerald-600 text-sm">Your resume is looking strong here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
