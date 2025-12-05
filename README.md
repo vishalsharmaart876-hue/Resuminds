@@ -1,3 +1,4 @@
+http://127.0.0.1:5500/index.html
 # Resuminds
 I’m extremely happy to share that I’ve completed my latest project “Resuminds”, an AI-driven resume analysis tool designed to help users improve their resumes with clarity, accuracy, and confidence.
 
