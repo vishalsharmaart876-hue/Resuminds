@@ -1,61 +1,32 @@
-http://127.0.0.1:5500/index.html 
-# Resuminds
-I’m extremely happy to share that I’ve completed my latest project “Resuminds”, an AI-driven resume analysis tool designed to help users improve their resumes with clarity, accuracy, and confidence.
+# Resume Forge Pro — Complete Suite
 
-🔍 What is Resuminds?
+**Resume Forge Pro** is a comprehensive, AI-powered web application designed to streamline the career preparation process. It combines a sophisticated resume builder with an interactive interview practice platform, all within a modern, high-performance interface.
 
-Resuminds is a smart web-based tool where users can upload or input their resume, and the system instantly analyzes it to provide:
+## Key Features
 
-✔ What’s good in the resume
-✔ What needs improvement
-✔ What’s incorrect or missing
-✔ How to structure the resume better
-✔ Suggestions to make the resume more professional & ATS-friendly
+### 🛠️ Smart Resume Builder
+* **Dynamic Templates**: Choose from various professional layouts, including "Modern Minimal," "Executive Suite," and "Creative Portfolio".
+* **Real-time Preview**: See changes instantly on a virtual "paper" canvas with adjustable zoom controls.
+* **AI Writing Assistant**: Integrated chatbot to help craft professional summaries, experience bullets, and skills.
+* **ATS Optimization**: Built-in score bars and checklists to ensure your resume is ready for Applicant Tracking Systems.
+* **Multi-Section Support**: Manage personal info, experience, education, skills, languages, certifications, and awards.
+* **Export Options**: Download your final product as a PDF or JSON for future editing.
 
-⚙️ How It Works:-
+### 🎯 Interview Practice Suite
+* **Multiple Training Modes**: Includes Behavior/HR, Technical, Aptitude, Computer Science, and specialized "Product Manager" tracks.
+* **Interactive Sessions**: Real-time timer and progress tracking for both MCQ and open-ended questions.
+* **AI-Driven Feedback**: Get instant scoring, star ratings, and "ideal answer" comparisons after each response.
+* **Mock Interviews**: A live-chat style interface featuring an AI interviewer with real-time evaluation of your performance.
+* **Performance Analytics**: Detailed results screen with grade rings, breakdown lists, and overall performance statistics.
 
-The tool takes the resume as input and uses advanced analysis logic to examine:
+## Technical Stack
+* **Frontend**: HTML5, CSS3 (using custom variables and Flexbox/Grid), and Vanilla JavaScript.
+* **Typography**: Integrated Google Fonts including *Playfair Display*, *DM Sans*, *Syne*, and *JetBrains Mono*.
+* **AI Integration**: Designed to connect with Google AI (Gemini) via API keys for intelligent content generation.
+* **Styling**: A custom "Dark Mode" aesthetic with glassmorphism effects and smooth CSS animations.
 
-1) Formatting
+## Getting Started
+1.  **Open the File**: Simply launch `resume-forge-fixed.html` in any modern web browser.
+2.  **API Activation**: To use the AI features, navigate to the API settings and enter your Google AI Studio key.
+3.  **Build or Practice**: Use the top navigation tabs to switch between the **Resume Builder** and the **Practice Lab**.
 
-2) Grammar & clarity
-
-3) Skills relevance
-
-4) Work experience quality
-
-5) Project descriptions
-
-6) ATS compatibility
-
-7) Overall presentation
-
-
-After processing, it gives a detailed feedback report that helps the user improve their resume instantly.
-
-🌟 Why I Built Resumeinds
-
-Being a student and job seeker myself, I realised how many people struggle with building the perfect resume. So, I wanted to create something that:
-
-1) Saves time
-
-2) Reduces confusion
-
-3) Gives honest, structured, AI-powered guidance
-
-4) Helps users stand out in job applications
-
-
-🧠 What I Learned During the Project
-
-Working on Resumeinds taught me a lot:
-
-1) Implementing AI-driven logic
-
-2) Handling text inputs in multiple formats
-
-3) User-friendly UI/UX principles
-
-4) Improving accuracy of feedback outputs
-
-5) Building scalable and clean architecture
